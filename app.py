@@ -9,4 +9,4 @@ class SecretarioApp(MDApp):
         return ListaPublicadores()
 
 if __name__ == "__main__":
-git commit    SecretarioApp().run()
+    SecretarioApp().run()
