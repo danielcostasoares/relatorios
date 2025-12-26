@@ -1,0 +1,30 @@
+CREATE TABLE publicadores (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome_completo TEXT NOT NULL,
+    data_nascimento TEXT,
+    data_batismo TEXT,
+    sexo TEXT,
+    designacoes TEXT,
+    privilegios TEXT,
+    esperanca TEXT,
+    grupo INTEGER,
+    ativo INTEGER DEFAULT 1
+);
+
+
+CREATE TABLE grupos (
+    numero INTEGER PRIMARY KEY
+);
+
+
+CREATE TABLE relatorios_mensais (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    publicador_id INTEGER,
+    ano_servico INTEGER,
+    mes INTEGER,
+    participou INTEGER,
+    estudos INTEGER,
+    horas INTEGER,
+    observacoes TEXT,
+    FOREIGN KEY (publicador_id) REFERENCES publicadores(id)
+);

@@ -1,15 +1,42 @@
-import os
 
-from flask import Flask, send_file
+from pathlib import Path
+from pdf.s21 import criar_cartao_ano_servico, preencher_mes
 
-app = Flask(__name__)
+BASE_DIR = Path(__file__).resolve().parent
 
-@app.route("/")
-def index():
-    return send_file('src/index.html')
+# ── Criar cartão do ano de serviço ───────────────────
+pdf = criar_cartao_ano_servico(
+    modelo_pdf=BASE_DIR / "/home/user/relatorios/dados/cartoes/S-21_T.pdf",
+    pasta_cartoes=BASE_DIR / "dados/cartoes",
+    nome_completo="João da Silva",
+    data_nascimento="10/05/1985",
+    data_batismo="12/08/2005",
+    sexo="M",
+    designacoes=["Anciao"],
+    privilegios=["Pioneiro Regular"],
+    esperanca="Outras",
+    ano_servico=2026
+)
 
-def main():
-    app.run(port=int(os.environ.get('PORT', 80)))
+print("Cartão criado em:", pdf)
 
-if __name__ == "__main__":
-    main()
+# ── Preencher um mês (teste) ─────────────────────────
+preencher_mes(
+    pdf_entrada=str(pdf),
+    pdf_saida=str(pdf),
+    mes_numero=11,  # Novembro
+    participou=True,
+    estudos=2,
+    horas=35,
+    observacoes="Boas visitas"
+)
+
+
+
+
+
+
+
+
+
+
